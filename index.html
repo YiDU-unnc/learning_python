@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yi Du, an electrical and electronic engineering student at UNNC. Selected work in embedded systems, signal processing, and applied machine learning.">
+  <meta name="theme-color" content="#f8f5ed">
+  <title>Yi Du | Engineering Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap masthead">
+      <a class="wordmark" href="#top">Yi Du<span aria-hidden="true">.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="contact-link" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="name">
+      <div class="hero-copy">
+        <p class="eyebrow">Electrical &amp; Electronic Engineering</p>
+        <h1 id="name">Yi Du<span>.</span></h1>
+        <p class="intro">I’m an engineering student at the University of Nottingham Ningbo China. I build embedded systems and use signal processing and machine learning to make sense of real-world data.</p>
+        <a class="button" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/radar-concept.webp" width="1440" height="960" alt="A radar module and a development board connected by wires on a sunlit workbench" fetchpriority="high">
+        <figcaption><span>Doppler radar and embedded hardware</span><span>AI-generated illustration</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="work-band" id="work" aria-labelledby="work-title">
+      <div class="wrap work-content">
+        <h2 id="work-title">Selected work.</h2>
+        <article class="featured">
+          <div class="feature-copy">
+            <p class="eyebrow">Embedded systems · Sep 2025 – Jan 2026</p>
+            <h3>Doppler radar<br class="desktop-only"> speed detection</h3>
+            <p>I led a four-person team to build and lab-test a system that measures target speed and displays it in real time. I designed the analogue front end, implemented FFT-based speed estimation on an STM32U575, and helped link the microcontroller to a CPLD-driven display over RS-485.</p>
+          </div>
+          <div class="signal-path">
+            <p class="eyebrow" id="signal-title">From sensor to display</p>
+            <ol aria-labelledby="signal-title">
+              <li><span>HB100 radar</span><span>Doppler signal</span></li>
+              <li><span>Analogue front end</span><span>Filter and amplify</span></li>
+              <li><span>STM32U575</span><span>Sample and estimate speed</span></li>
+              <li><span>RS-485 → CPLD</span><span>Drive seven-segment display</span></li>
+            </ol>
+          </div>
+        </article>
+        <div class="work-grid">
+          <article class="project">
+            <p class="eyebrow">Applied machine learning · Jun – Sep 2025</p>
+            <h3>Container terminal operations</h3>
+            <p>As a research assistant at UNNC, I turned operational logs from Ningbo-Zhoushan Port into time-series features for assessing how smoothly the terminal operates.</p>
+            <details>
+              <summary>My contribution</summary>
+              <p>I built the Python data pipeline, developed metrics for bottlenecks such as waiting time and congestion, and built a replay tool for exploring historical operations and alternative configurations. I also helped train and tune a hybrid CNN–LSTM model.</p>
+            </details>
+          </article>
+          <article class="project">
+            <p class="eyebrow">Robotics · Sep 2024 – Jun 2025</p>
+            <h3>Autonomous robotic vehicle</h3>
+            <p>Our team built a vehicle that could follow lines, recognise traffic lights, count shapes, and brake for obstacles.</p>
+            <details>
+              <summary>My contribution</summary>
+              <p>I implemented I²C and UART interfaces and an SPI link to an nRF24L01+ radio. I helped tune the PID controller and develop the OpenCV pipeline on Raspberry Pi, including HSV thresholding, perspective transformation, and template matching.</p>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap profile">
+      <section class="profile-row" id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">Experience.</h2>
+        <div>
+          <article class="entry">
+            <p class="eyebrow">Jun – Sep 2026</p>
+            <h3>Test Engineer Intern</h3>
+            <p class="organisation">Hikvision · Hangzhou</p>
+            <p>I tested the functionality and long-duration stability of surveillance hardware, automated test procedures in Python, and configured devices from the Linux command line. I also monitored serial logs, upgraded firmware, and verified device communication over RS-485.</p>
+          </article>
+          <article class="entry">
+            <p class="eyebrow">Jun – Sep 2025</p>
+            <h3>Research Assistant</h3>
+            <p class="organisation">Department of Electrical and Electronic Engineering · UNNC</p>
+            <p>I worked on data-driven assessment of container terminal operations under Dr Qianyu Liu.</p>
+          </article>
+        </div>
+      </section>
+      <section class="profile-row" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About.</h2>
+        <div>
+          <article class="entry">
+            <p class="eyebrow">Sep 2023 – Jun 2027 (expected)</p>
+            <h3>BEng (Hons) Electrical and Electronic Engineering</h3>
+            <p class="organisation">University of Nottingham Ningbo China</p>
+            <p>My studies cover electronic processing and communications, electrical energy conditioning and control, and engineering modelling. Outside class, I organise weekly training sessions and matches for the UNNC Football Club.</p>
+          </article>
+          <article class="entry">
+            <h3>Technical skills</h3>
+            <dl class="skills">
+              <div><dt>Programming &amp; modelling</dt><dd>Python, C, C++, MATLAB, Verilog HDL</dd></div>
+              <div><dt>Embedded platforms</dt><dd>STM32, Raspberry Pi, Arduino</dd></div>
+              <div><dt>Circuit design &amp; simulation</dt><dd>KiCad, LTspice, PLECS</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact">
+    <div class="wrap footer-content">
+      <div>
+        <h2>Get in touch.</h2>
+        <a class="profile-link" href="https://github.com/dy2762811353-sudo">Find me on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+      <a class="back" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
