@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yi Du's academic homepage. Electrical and electronic engineering at UNNC, with projects in embedded systems, radar, robotics, and applied machine learning.">
+  <meta name="theme-color" content="#f3f7fd">
+  <title>Yi Du | Academic Homepage</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --white: #fff;
+      --page: #f3f7fd;
+      --line: #cbdaf0;
+      --ink: #11243e;
+      --muted: #425975;
+      --blue: #164b94;
+      --navy: #0b2547;
+      --chart: #102f55;
+      --chart-line: #3d5f86;
+      --pale: #d5e8ff;
+      --trace: #80c2ff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.65 Arial, sans-serif; }
+    h1, h2, h3, p, ul, dl, dd, figure { margin: 0; }
+    h1, h2, h3 { line-height: 1.18; }
+    h1 { color: var(--navy); font-size: clamp(2.8rem, 7vw, 4.9rem); letter-spacing: -.065em; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); letter-spacing: -.035em; }
+    h3 { font-size: 1.13rem; letter-spacing: -.015em; }
+    a { color: var(--blue); text-underline-offset: .21em; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+
+    .wrap { width: min(70rem, calc(100% - 2.5rem)); margin-inline: auto; }
+    .skip-link { position: absolute; z-index: 2; left: 1rem; top: 1rem; padding: .5rem .8rem; background: var(--white); transform: translateY(-200%); }
+    .skip-link:focus { transform: none; }
+    .showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.72fr);
+      align-items: center;
+      gap: 2rem;
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      margin-top: clamp(.8rem, 2.8vw, 2rem);
+      border-radius: .85rem;
+      background: var(--navy);
+      color: var(--white);
+    }
+    .showcase :focus-visible { outline-color: var(--trace); }
+    .showcase a { color: var(--white); }
+    .label { color: var(--blue); font-size: .82rem; font-weight: 700; }
+    .showcase .label { color: var(--pale); }
+    .showcase h2 { font-size: clamp(1.9rem, 4vw, 3.35rem); margin: .5rem 0 .8rem; }
+    .showcase-copy p:not(.label) { color: var(--pale); max-width: 35ch; }
+    .continue { display: inline-flex; align-items: center; min-height: 44px; margin-top: .8rem; font-weight: 700; }
+
+    .demo {
+      min-width: 0;
+      padding: 1rem;
+      border: 1px solid var(--chart-line);
+      border-radius: .6rem;
+      background: var(--chart);
+    }
+    .demo-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .25rem .8rem; margin-bottom: .4rem; }
+    .demo-header h3 { font-size: .98rem; }
+    .demo-header output { color: var(--pale); font-size: .9rem; font-variant-numeric: tabular-nums; }
+    .plot { display: block; width: 100%; height: clamp(7.4rem, 17vw, 12.6rem); }
+    .axis { display: grid; grid-template-columns: 1fr auto 1fr; color: var(--pale); font-size: .76rem; }
+    .axis span:last-child { text-align: right; }
+    .control { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .7rem; margin-top: .65rem; }
+    .control[hidden] { display: none; }
+    .control label { color: var(--white); font-size: .9rem; font-weight: 700; }
+    .control input { width: 100%; min-height: 44px; margin: 0; accent-color: var(--trace); cursor: pointer; }
+    .demo figcaption { color: var(--pale); font-size: .8rem; line-height: 1.5; }
+
+    .page-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0 clamp(.95rem, 3vw, 2rem);
+      padding-inline: clamp(.1rem, 2vw, 1.4rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .page-nav a { display: inline-flex; align-items: center; min-height: 48px; font-size: .91rem; font-weight: 700; }
+    .page-nav a::before { content: "["; margin-right: .08rem; }
+    .page-nav a::after { content: "]"; margin-left: .08rem; }
+    .sheet { margin-block: 1.25rem 2.5rem; padding: 0 clamp(1.1rem, 5vw, 3.5rem); border: 1px solid var(--line); border-radius: .7rem; background: var(--white); }
+    .identity { padding-block: clamp(1.65rem, 5vw, 3.5rem) 1.6rem; }
+    .degree { margin-top: .55rem; color: var(--ink); font-size: clamp(1.03rem, 2.4vw, 1.23rem); font-weight: 700; }
+    .university { color: var(--muted); }
+    .profile-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: .35rem; font-weight: 700; }
+    .section { display: grid; grid-template-columns: minmax(8rem, .55fr) minmax(0, 2fr); gap: clamp(.65rem, 3vw, 2.25rem); padding-block: 1.6rem; border-top: 1px solid var(--line); }
+    .section > h2 { color: var(--blue); }
+    .section p, .section ul { max-width: 72ch; }
+    .items { display: grid; gap: 1.35rem; }
+    .entry + .entry { border-top: 1px solid var(--line); padding-top: 1.35rem; }
+    .entry-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem .8rem; }
+    .period { color: var(--muted); font-size: .85rem; }
+    .affiliation { color: var(--blue); font-size: .9rem; font-weight: 700; }
+    .entry p, .entry ul { margin-top: .35rem; }
+    .entry ul { padding-left: 1.2rem; }
+    .entry li + li { margin-top: .24rem; }
+    .activity-list { padding-left: 1.2rem; }
+    .activity-list li + li { margin-top: .35rem; }
+    .skills { display: grid; gap: .65rem; }
+    .skills div { display: grid; grid-template-columns: minmax(9rem, .9fr) minmax(0, 1.6fr); gap: .15rem 1rem; }
+    .skills dt { font-weight: 700; }
+    .page-footer { padding-block: .6rem; border-top: 1px solid var(--line); }
+    .page-footer a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+
+    @media (max-width: 730px) {
+      .wrap { width: calc(100% - 1.5rem); }
+      .showcase, .section { grid-template-columns: minmax(0, 1fr); }
+      .showcase { gap: 1.1rem; }
+      .section { gap: .7rem; padding-block: 1.35rem; }
+      .sheet { margin-top: .8rem; }
+      .showcase-copy p:not(.label) { max-width: 45ch; }
+    }
+    @media (max-width: 420px) {
+      .control, .skills div { grid-template-columns: 1fr; }
+      .control { gap: 0; }
+      .page-nav { column-gap: 1rem; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#home">Skip to homepage</a>
+  <header class="wrap showcase" aria-labelledby="demo-title">
+    <div class="showcase-copy">
+      <p class="label">Featured engineering project</p>
+      <h2 id="demo-title">Doppler radar speed detection</h2>
+      <p>Adjust the target speed to see how the expected Doppler frequency shifts for an HB100 radar.</p>
+      <a class="continue" href="#home">Continue to my homepage&nbsp; ↓</a>
+    </div>
+    <figure class="demo">
+      <div class="demo-header">
+        <h3>Doppler spectrum</h3>
+        <output id="peak" for="speed">Peak at 468 Hz</output>
+      </div>
+      <canvas id="spectrum" class="plot" width="600" height="200" aria-hidden="true"></canvas>
+      <div class="axis" aria-hidden="true"><span>0 Hz</span><span>Frequency</span><span>1,200 Hz</span></div>
+      <div class="control" id="speed-control" hidden>
+        <label for="speed">Target speed <span id="speed-value" aria-hidden="true">24 km/h</span></label>
+        <input id="speed" type="range" min="0" max="60" value="24" step="1" aria-describedby="model-note">
+      </div>
+      <figcaption id="model-note">Illustrative model for motion along the radar axis. The spectrum is simulated.</figcaption>
+    </figure>
+  </header>
+
+  <nav class="wrap page-nav" aria-label="Homepage sections">
+    <a href="#home">Home</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#activities">Activities</a>
+  </nav>
+
+  <main id="home" class="wrap sheet" tabindex="-1">
+    <header class="identity">
+      <h1>Yi Du</h1>
+      <p class="degree">Electrical and Electronic Engineering Undergraduate</p>
+      <p class="university">University of Nottingham Ningbo China</p>
+      <a class="profile-link" href="https://github.com/YiDU-unnc">GitHub</a>
+    </header>
+
+    <section class="section" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p>I work on embedded systems, signal processing, and applied machine learning. My projects include a Doppler radar speed detector, an autonomous robotic vehicle, and a data pipeline for analysing container terminal operations.</p>
+    </section>
+
+    <section class="section" id="education" aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>BEng (Hons) Electrical and Electronic Engineering</h3>
+          <span class="period">Sep 2023 – Jun 2027 (expected)</span>
+        </div>
+        <p class="affiliation">University of Nottingham Ningbo China</p>
+        <p>Core study in electronic processing and communications, electrical energy conditioning and control, and engineering modelling.</p>
+      </article>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <div class="items">
+        <article class="entry">
+          <div class="entry-head"><h3>Test Engineer Intern</h3><span class="period">Jun – Sep 2026</span></div>
+          <p class="affiliation">Hikvision · Hangzhou</p>
+          <ul>
+            <li>Ran functional, stress and long-duration stability tests on surveillance hardware.</li>
+            <li>Automated test procedures with Python and configured device networks through the Linux command line.</li>
+            <li>Monitored serial logs, performed firmware upgrades and verified end-to-end RS-485 communication.</li>
+          </ul>
+        </article>
+        <article class="entry">
+          <div class="entry-head"><h3>Research Assistant</h3><span class="period">Jun – Sep 2025</span></div>
+          <p class="affiliation">Department of Electrical and Electronic Engineering · UNNC</p>
+          <p>Worked with Dr Qianyu Liu on an AI-enabled system for assessing container terminal operations at Ningbo-Zhoushan Port.</p>
+          <ul>
+            <li>Built a Python pipeline that transformed heterogeneous operational logs into time-series features for model training.</li>
+            <li>Quantified waiting time and congestion and implemented an interactive replay tool with what-if analysis.</li>
+            <li>Contributed to the training and tuning of a hybrid CNN–LSTM model for scoring operations over time.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <div class="items">
+        <article class="entry">
+          <div class="entry-head"><h3>Doppler Radar Speed Detection</h3><span class="period">Sep 2025 – Jan 2026</span></div>
+          <p class="affiliation">Electronic Systems Group Design Project</p>
+          <p>I led a four-person team to develop and lab-test a real-time speed detector with a remote two-digit display.</p>
+          <ul>
+            <li>Characterised the HB100 sensor and designed a band-pass filter and amplifier for the analogue signal.</li>
+            <li>Configured the STM32U575 ADC and implemented FFT peak detection in embedded C.</li>
+            <li>Helped implement the RS-485 link and wrote Verilog logic for the CPLD-driven seven-segment display.</li>
+          </ul>
+        </article>
+        <article class="entry">
+          <div class="entry-head"><h3>Autonomous Robotic Vehicle</h3><span class="period">Sep 2024 – Jun 2025</span></div>
+          <p class="affiliation">Applied Electrical and Electronic Engineering Construction Project</p>
+          <p>Our Arduino and Raspberry Pi vehicle followed lines, recognised traffic lights, counted shapes, and braked for obstacles.</p>
+          <ul>
+            <li>Implemented I²C, UART and an SPI link to an nRF24L01+ radio for remote control and feedback.</li>
+            <li>Helped tune the PID controller and develop the OpenCV pipeline using HSV thresholding, perspective transformation and template matching.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <dl class="skills">
+        <div><dt>Programming and modelling</dt><dd>Python, C, C++, MATLAB, Verilog HDL</dd></div>
+        <div><dt>Embedded platforms</dt><dd>STM32, Raspberry Pi, Arduino</dd></div>
+        <div><dt>Circuit design and simulation</dt><dd>KiCad, LTspice, PLECS</dd></div>
+        <div><dt>Languages</dt><dd>Mandarin Chinese and English</dd></div>
+      </dl>
+    </section>
+
+    <section class="section" id="activities" aria-labelledby="activities-title">
+      <h2 id="activities-title">Activities</h2>
+      <ul class="activity-list">
+        <li><strong>UNNC Li Dak Sum Incubator.</strong> Supported start-up data analysis, compliance review, and event coordination.</li>
+        <li><strong>Fufeng Project.</strong> Co-organised a volunteer arts education programme in rural communities.</li>
+        <li><strong>UNNC Football Club.</strong> Organise weekly training sessions and matches.</li>
+      </ul>
+    </section>
+
+    <footer class="page-footer"><a href="#top">Back to top ↑</a></footer>
+  </main>
+
+  <script>
+    const speed = document.querySelector('#speed');
+    const speedValue = document.querySelector('#speed-value');
+    const peak = document.querySelector('#peak');
+    const canvas = document.querySelector('#spectrum');
+    const context = canvas.getContext('2d');
+    const chartStyle = getComputedStyle(canvas);
+    const gridColor = chartStyle.getPropertyValue('--chart-line').trim();
+    const traceColor = chartStyle.getPropertyValue('--trace').trim();
+    const maxFrequency = 1200;
+    // AgilSense MSAN-001, annex 4: HB100, target moving along the sensor axis.
+    const hertzPerKph = 19.49;
+
+    function drawSpectrum() {
+      const targetSpeed = speed.valueAsNumber;
+      const frequency = targetSpeed * hertzPerKph;
+      speedValue.textContent = `${targetSpeed} km/h`;
+      speed.setAttribute('aria-valuetext', `${targetSpeed} kilometres per hour`);
+      peak.textContent = targetSpeed === 0 ? 'No Doppler shift' : `Peak at ${Math.round(frequency)} Hz`;
+
+      const { width, height } = canvas.getBoundingClientRect();
+      const scale = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * scale);
+      canvas.height = Math.round(height * scale);
+      context.setTransform(scale, 0, 0, scale, 0, 0);
+      const baseline = height - 8;
+
+      context.beginPath();
+      for (let column = 0; column <= 6; column++) {
+        const x = width * column / 6;
+        context.moveTo(x, 8);
+        context.lineTo(x, baseline);
+      }
+      for (let row = 0; row <= 4; row++) {
+        const y = 8 + (baseline - 8) * row / 4;
+        context.moveTo(0, y);
+        context.lineTo(width, y);
+      }
+      context.strokeStyle = gridColor;
+      context.stroke();
+
+      context.beginPath();
+      for (let x = 0; x <= width; x++) {
+        const offset = (x / width * maxFrequency - frequency) / 38;
+        const amplitude = targetSpeed === 0 ? 0 : Math.exp(-offset * offset / 2);
+        const y = baseline - 2 - amplitude * (height - 26);
+        if (x === 0) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      }
+      context.strokeStyle = traceColor;
+      context.lineWidth = 2;
+      context.stroke();
+    }
+
+    if (context) {
+      document.querySelector('#speed-control').hidden = false;
+      speed.addEventListener('input', drawSpectrum);
+      new ResizeObserver(drawSpectrum).observe(canvas);
+      drawSpectrum();
+    }
+  </script>
+</body>
+</html>
