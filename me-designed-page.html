@@ -16,8 +16,8 @@
       --muted: #425975;
       --blue: #164b94;
       --navy: #0b2547;
-      --chart: #102f55;
-      --chart-line: #3d5f86;
+      --banner-control: #102f55;
+      --banner-line: #3d5f86;
       --pale: #d5e8ff;
       --trace: #80c2ff;
     }
@@ -36,43 +36,81 @@
     .wrap { width: min(70rem, calc(100% - 2.5rem)); margin-inline: auto; }
     .skip-link { position: absolute; z-index: 2; left: 1rem; top: 1rem; padding: .5rem .8rem; background: var(--white); transform: translateY(-200%); }
     .skip-link:focus { transform: none; }
-    .showcase {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.72fr);
-      align-items: center;
-      gap: 2rem;
-      padding: clamp(1.25rem, 4vw, 2.5rem);
+    .carousel {
+      overflow: hidden;
       margin-top: clamp(.8rem, 2.8vw, 2rem);
       border-radius: .85rem;
       background: var(--navy);
       color: var(--white);
     }
-    .showcase :focus-visible { outline-color: var(--trace); }
-    .showcase a { color: var(--white); }
-    .label { color: var(--blue); font-size: .82rem; font-weight: 700; }
-    .showcase .label { color: var(--pale); }
-    .showcase h2 { font-size: clamp(1.9rem, 4vw, 3.35rem); margin: .5rem 0 .8rem; }
-    .showcase-copy p:not(.label) { color: var(--pale); max-width: 35ch; }
-    .continue { display: inline-flex; align-items: center; min-height: 44px; margin-top: .8rem; font-weight: 700; }
-
-    .demo {
-      min-width: 0;
-      padding: 1rem;
-      border: 1px solid var(--chart-line);
-      border-radius: .6rem;
-      background: var(--chart);
+    .carousel :focus-visible { outline-color: var(--trace); }
+    .carousel a { color: var(--white); }
+    .carousel-slide {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.65fr);
+      min-height: clamp(17.5rem, 28vw, 20rem);
     }
-    .demo-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .25rem .8rem; margin-bottom: .4rem; }
-    .demo-header h3 { font-size: .98rem; }
-    .demo-header output { color: var(--pale); font-size: .9rem; font-variant-numeric: tabular-nums; }
-    .plot { display: block; width: 100%; height: clamp(7.4rem, 17vw, 12.6rem); }
-    .axis { display: grid; grid-template-columns: 1fr auto 1fr; color: var(--pale); font-size: .76rem; }
-    .axis span:last-child { text-align: right; }
-    .control { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .7rem; margin-top: .65rem; }
-    .control[hidden] { display: none; }
-    .control label { color: var(--white); font-size: .9rem; font-weight: 700; }
-    .control input { width: 100%; min-height: 44px; margin: 0; accent-color: var(--trace); cursor: pointer; }
-    .demo figcaption { color: var(--pale); font-size: .8rem; line-height: 1.5; }
+    .carousel-slide[hidden], .carousel-controls[hidden] { display: none; }
+    .carousel-slide.is-entering { animation: banner-enter .42s ease-out; }
+    @keyframes banner-enter { from { opacity: .42; } to { opacity: 1; } }
+    .slide-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: .55rem;
+      min-width: 0;
+      padding: clamp(1rem, 3.4vw, 2rem);
+    }
+    .slide-copy h2 { font-size: clamp(1.45rem, 3vw, 2.6rem); }
+    .slide-copy p { color: var(--pale); font-size: .95rem; line-height: 1.45; }
+    .slide-copy .slide-category { font-size: .82rem; font-weight: 700; }
+    .slide-link { display: inline-flex; align-items: center; min-height: 44px; font-size: .9rem; font-weight: 700; }
+    .slide-media {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      background: var(--white);
+    }
+    .slide-media img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+    .slide-media--photo { background: var(--banner-control); }
+    .slide-media--photo img { object-fit: cover; object-position: center 57%; }
+    .slide-media--portrait { background: var(--banner-control); }
+    .slide-media--diagram { background: #edf4fd; }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .15rem .65rem;
+      padding: .25rem clamp(.65rem, 2vw, 1.4rem);
+      background: var(--banner-control);
+      border-top: 1px solid var(--banner-line);
+    }
+    .carousel-buttons, .carousel-dots { display: flex; align-items: center; gap: .2rem; }
+    .carousel button {
+      background: transparent;
+      color: var(--white);
+      border: 0;
+      border-radius: .25rem;
+      min-height: 44px;
+      padding-inline: .55rem;
+      font: inherit;
+      cursor: pointer;
+    }
+    .carousel button:hover { background: #234a75; }
+    .carousel .carousel-arrow { min-width: 44px; font-size: 1.65rem; line-height: 1; }
+    .carousel .carousel-toggle { font-size: .88rem; font-weight: 700; }
+    .carousel .carousel-dot { display: grid; place-items: center; width: 28px; padding-inline: 0; }
+    .carousel-dot::after {
+      content: "";
+      width: .55rem;
+      height: .55rem;
+      border-radius: 1rem;
+      border: 1px solid var(--pale);
+    }
+    .carousel-dot[aria-current="true"]::after { width: 1rem; border-color: var(--trace); background: var(--trace); }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
     .page-nav {
       display: flex;
@@ -111,42 +149,121 @@
 
     @media (max-width: 730px) {
       .wrap { width: calc(100% - 1.5rem); }
-      .showcase, .section { grid-template-columns: minmax(0, 1fr); }
-      .showcase { gap: 1.1rem; }
+      .section { grid-template-columns: minmax(0, 1fr); }
+      .carousel-slide {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 11.5rem auto;
+        min-height: 24rem;
+      }
+      .slide-media { grid-row: 1; }
+      .slide-copy { gap: .35rem; }
+      .slide-copy h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
+      .slide-link { min-height: 38px; }
       .section { gap: .7rem; padding-block: 1.35rem; }
       .sheet { margin-top: .8rem; }
-      .showcase-copy p:not(.label) { max-width: 45ch; }
     }
     @media (max-width: 420px) {
-      .control, .skills div { grid-template-columns: 1fr; }
-      .control { gap: 0; }
+      .skills div { grid-template-columns: 1fr; }
+      .carousel-controls { justify-content: center; }
       .page-nav { column-gap: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-slide.is-entering { animation: none; }
     }
   </style>
 </head>
 <body id="top">
   <a class="skip-link" href="#home">Skip to homepage</a>
-  <header class="wrap showcase" aria-labelledby="demo-title">
-    <div class="showcase-copy">
-      <p class="label">Featured engineering project</p>
-      <h2 id="demo-title">Doppler radar speed detection</h2>
-      <p>Adjust the target speed to see how the expected Doppler frequency shifts for an HB100 radar.</p>
-      <a class="continue" href="#home">Continue to my homepage&nbsp; ↓</a>
+  <section class="wrap carousel" aria-label="Featured project images" aria-roledescription="carousel">
+    <div id="project-slides">
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Forward DC–DC converter">
+        <div class="slide-copy">
+          <p class="slide-category">Power electronics · AI-generated concept image</p>
+          <h2>Forward DC–DC converter</h2>
+          <p>Stable 50 W operation with output ripple within 0.2 V.</p>
+          <a class="slide-link" href="#converter-project">Explore the converter project</a>
+        </div>
+        <figure class="slide-media slide-media--photo">
+          <img src="assets-v2/converter-concept.webp" width="1440" height="960" fetchpriority="high" alt="Illustration of a converter board with wound magnetics and MOSFETs on a test bench">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Autonomous robotic vehicle" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Robotics · Project photo</p>
+          <h2>Autonomous robotic vehicle</h2>
+          <p>An Arduino and Raspberry Pi vehicle built for line following, traffic-light recognition and obstacle braking.</p>
+          <a class="slide-link" href="#robot-project">Explore the vehicle project</a>
+        </div>
+        <figure class="slide-media slide-media--portrait">
+          <img src="assets-v2/robot-vehicle.webp" width="233" height="390" loading="lazy" alt="Wheeled robotic vehicle with exposed wiring and a blue LCD">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Container terminal operations" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Applied machine learning · Reference diagram</p>
+          <h2>Container terminal operations</h2>
+          <p>Operational data captures how vessels, quay cranes, automated vehicles and yard cranes work together.</p>
+          <a class="slide-link" href="#terminal-research">Explore the terminal research</a>
+        </div>
+        <figure class="slide-media">
+          <img src="assets-v2/terminal-layout.webp" width="1024" height="412" loading="lazy" alt="Container handling routes between vessels, quay cranes, automated guided vehicles and yard cranes">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Embedded display and communications" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Embedded systems · Hardware reference</p>
+          <h2>Embedded display and communications</h2>
+          <p>The project used RS-485 to send speed readings to a CPLD-driven display.</p>
+          <a class="slide-link" href="#radar-project">Explore the signal-processing project</a>
+        </div>
+        <figure class="slide-media">
+          <img src="assets-v2/cpld-display.webp" width="1143" height="494" loading="lazy" alt="Xilinx programming cable, seven-segment display carrier board, and JTAG wiring diagram">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Converter design and testing" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Power electronics · Project workflow</p>
+          <h2>Converter design and testing</h2>
+          <p>Magnetics and PWM, Type III compensation in MATLAB, PLECS simulation, and hardware testing.</p>
+          <a class="slide-link" href="#converter-project">Explore the converter project</a>
+        </div>
+        <figure class="slide-media slide-media--diagram">
+          <img src="assets-v2/converter-workflow.webp" width="1120" height="470" loading="lazy" alt="Converter workflow from magnetics and PWM to control design, circuit simulation and hardware testing">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="Switch-mode power supplies" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Power electronics · Commercial examples</p>
+          <h2>Switch-mode power supplies</h2>
+          <p>Commercial units illustrate the placement of transformers, inductors, capacitors and heatsinks.</p>
+          <a class="slide-link" href="#converter-project">Explore the converter project</a>
+        </div>
+        <figure class="slide-media">
+          <img src="assets-v2/commercial-smps.webp" width="1197" height="528" loading="lazy" alt="Two opened commercial switch-mode power supplies showing their magnetic components and heatsinks">
+        </figure>
+      </article>
+      <article class="carousel-slide" aria-roledescription="slide" aria-label="From port logs to operational insights" hidden>
+        <div class="slide-copy">
+          <p class="slide-category">Applied machine learning · Research workflow</p>
+          <h2>From port logs to operational insights</h2>
+          <p>Operational logs became time-series features for a CNN–LSTM model, alongside replay and what-if analysis.</p>
+          <a class="slide-link" href="#terminal-research">Explore the terminal research</a>
+        </div>
+        <figure class="slide-media slide-media--diagram">
+          <img src="assets-v2/terminal-workflow.webp" width="1120" height="470" loading="lazy" alt="Terminal workflow from operational logs to time-series features, CNN–LSTM scoring and interactive replay">
+        </figure>
+      </article>
     </div>
-    <figure class="demo">
-      <div class="demo-header">
-        <h3>Doppler spectrum</h3>
-        <output id="peak" for="speed">Peak at 468 Hz</output>
+    <div class="carousel-controls" hidden>
+      <div class="carousel-buttons">
+        <button class="carousel-toggle" type="button" aria-controls="project-slides">Pause</button>
+        <button class="carousel-arrow" type="button" data-step="-1" aria-label="Previous image" aria-controls="project-slides">‹</button>
+        <button class="carousel-arrow" type="button" data-step="1" aria-label="Next image" aria-controls="project-slides">›</button>
       </div>
-      <canvas id="spectrum" class="plot" width="600" height="200" aria-hidden="true"></canvas>
-      <div class="axis" aria-hidden="true"><span>0 Hz</span><span>Frequency</span><span>1,200 Hz</span></div>
-      <div class="control" id="speed-control" hidden>
-        <label for="speed">Target speed <span id="speed-value" aria-hidden="true">24 km/h</span></label>
-        <input id="speed" type="range" min="0" max="60" value="24" step="1" aria-describedby="model-note">
-      </div>
-      <figcaption id="model-note">Illustrative model for motion along the radar axis. The spectrum is simulated.</figcaption>
-    </figure>
-  </header>
+      <div class="carousel-dots" role="group" aria-label="Choose an image"></div>
+      <p class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  </section>
 
   <nav class="wrap page-nav" aria-label="Homepage sections">
     <a href="#home">Home</a>
@@ -194,7 +311,7 @@
             <li>Monitored serial logs, performed firmware upgrades and verified end-to-end RS-485 communication.</li>
           </ul>
         </article>
-        <article class="entry">
+        <article class="entry" id="terminal-research">
           <div class="entry-head"><h3>Research Assistant</h3><span class="period">Jun – Sep 2025</span></div>
           <p class="affiliation">Department of Electrical and Electronic Engineering · UNNC</p>
           <p>Worked with Dr Qianyu Liu on an AI-enabled system for assessing container terminal operations at Ningbo-Zhoushan Port.</p>
@@ -210,7 +327,7 @@
     <section class="section" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Projects</h2>
       <div class="items">
-        <article class="entry">
+        <article class="entry" id="converter-project">
           <div class="entry-head"><h3>Two-Transistor Forward DC–DC Converter</h3><span class="period">Feb – Jun 2026</span></div>
           <p class="affiliation">Energy Conditioning Group Design Project · Mark 77</p>
           <p>Our team designed and built a two-transistor forward converter and achieved stable 50 W operation with output ripple within 0.2 V.</p>
@@ -220,7 +337,7 @@
             <li>Conducted full-power tests in open- and closed-loop operation, diagnosed excessive output ripple and leakage-inductance effects, and refined the hardware.</li>
           </ul>
         </article>
-        <article class="entry">
+        <article class="entry" id="radar-project">
           <div class="entry-head"><h3>Doppler Radar Speed Detection</h3><span class="period">Sep 2025 – Jan 2026</span></div>
           <p class="affiliation">Electronic Systems Group Design Project</p>
           <p>I led a four-person team to develop and lab-test a real-time speed detector with a remote two-digit display.</p>
@@ -230,7 +347,7 @@
             <li>Helped implement the RS-485 link and wrote Verilog logic for the CPLD-driven seven-segment display.</li>
           </ul>
         </article>
-        <article class="entry">
+        <article class="entry" id="robot-project">
           <div class="entry-head"><h3>Autonomous Robotic Vehicle</h3><span class="period">Sep 2024 – Jun 2025</span></div>
           <p class="affiliation">Applied Electrical and Electronic Engineering Construction Project</p>
           <p>Our Arduino and Raspberry Pi vehicle followed lines, recognised traffic lights, counted shapes, and braked for obstacles.</p>
@@ -265,65 +382,94 @@
   </main>
 
   <script>
-    const speed = document.querySelector('#speed');
-    const speedValue = document.querySelector('#speed-value');
-    const peak = document.querySelector('#peak');
-    const canvas = document.querySelector('#spectrum');
-    const context = canvas.getContext('2d');
-    const chartStyle = getComputedStyle(canvas);
-    const gridColor = chartStyle.getPropertyValue('--chart-line').trim();
-    const traceColor = chartStyle.getPropertyValue('--trace').trim();
-    const maxFrequency = 1200;
-    // AgilSense MSAN-001, annex 4: HB100, target moving along the sensor axis.
-    const hertzPerKph = 19.49;
+    const carousel = document.querySelector('.carousel');
+    const slides = [...carousel.querySelectorAll('.carousel-slide')];
+    const controls = carousel.querySelector('.carousel-controls');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    const toggle = carousel.querySelector('.carousel-toggle');
+    const announcement = carousel.querySelector('[aria-live]');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const rotationDelay = 6500;
+    let active = 0;
+    let rotating = !motion.matches;
+    let hovering = false;
+    let focused = false;
+    let timer;
 
-    function drawSpectrum() {
-      const targetSpeed = speed.valueAsNumber;
-      const frequency = targetSpeed * hertzPerKph;
-      speedValue.textContent = `${targetSpeed} km/h`;
-      speed.setAttribute('aria-valuetext', `${targetSpeed} kilometres per hour`);
-      peak.textContent = targetSpeed === 0 ? 'No Doppler shift' : `Peak at ${Math.round(frequency)} Hz`;
+    const dots = slides.map((slide, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'carousel-dot';
+      button.setAttribute('aria-label', `Image ${index + 1}: ${slide.getAttribute('aria-label')}`);
+      button.addEventListener('click', () => selectManually(index));
+      dotsContainer.append(button);
+      return button;
+    });
 
-      const { width, height } = canvas.getBoundingClientRect();
-      const scale = window.devicePixelRatio || 1;
-      canvas.width = Math.round(width * scale);
-      canvas.height = Math.round(height * scale);
-      context.setTransform(scale, 0, 0, scale, 0, 0);
-      const baseline = height - 8;
-
-      context.beginPath();
-      for (let column = 0; column <= 6; column++) {
-        const x = width * column / 6;
-        context.moveTo(x, 8);
-        context.lineTo(x, baseline);
+    function showSlide(index, manual = false) {
+      slides[active].classList.remove('is-entering');
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, position) => {
+        slide.hidden = position !== active;
+        dots[position].setAttribute('aria-current', String(position === active));
+      });
+      slides[active].classList.add('is-entering');
+      slides[(active + 1) % slides.length].querySelector('img').loading = 'eager';
+      if (manual) {
+        announcement.textContent = `Image ${active + 1} of ${slides.length}: ${slides[active].getAttribute('aria-label')}`;
       }
-      for (let row = 0; row <= 4; row++) {
-        const y = 8 + (baseline - 8) * row / 4;
-        context.moveTo(0, y);
-        context.lineTo(width, y);
-      }
-      context.strokeStyle = gridColor;
-      context.stroke();
-
-      context.beginPath();
-      for (let x = 0; x <= width; x++) {
-        const offset = (x / width * maxFrequency - frequency) / 38;
-        const amplitude = targetSpeed === 0 ? 0 : Math.exp(-offset * offset / 2);
-        const y = baseline - 2 - amplitude * (height - 26);
-        if (x === 0) context.moveTo(x, y);
-        else context.lineTo(x, y);
-      }
-      context.strokeStyle = traceColor;
-      context.lineWidth = 2;
-      context.stroke();
     }
 
-    if (context) {
-      document.querySelector('#speed-control').hidden = false;
-      speed.addEventListener('input', drawSpectrum);
-      new ResizeObserver(drawSpectrum).observe(canvas);
-      drawSpectrum();
+    function scheduleRotation() {
+      clearTimeout(timer);
+      if (rotating && !hovering && !focused && !document.hidden) {
+        timer = setTimeout(() => {
+          showSlide(active + 1);
+          scheduleRotation();
+        }, rotationDelay);
+      }
     }
+
+    function setRotation(value) {
+      rotating = value;
+      toggle.textContent = rotating ? 'Pause' : 'Play';
+      toggle.setAttribute('aria-label', rotating ? 'Pause slideshow' : 'Play slideshow');
+      scheduleRotation();
+    }
+
+    function selectManually(index) {
+      showSlide(index, true);
+      setRotation(false);
+    }
+
+    toggle.addEventListener('click', () => setRotation(!rotating));
+    carousel.querySelectorAll('[data-step]').forEach(button => {
+      button.addEventListener('click', () => selectManually(active + Number(button.dataset.step)));
+    });
+    carousel.addEventListener('pointerenter', (event) => {
+      hovering = event.pointerType !== 'touch';
+      scheduleRotation();
+    });
+    carousel.addEventListener('pointerleave', () => {
+      hovering = false;
+      scheduleRotation();
+    });
+    carousel.addEventListener('focusin', () => {
+      focused = true;
+      scheduleRotation();
+    });
+    carousel.addEventListener('focusout', event => {
+      focused = carousel.contains(event.relatedTarget);
+      scheduleRotation();
+    });
+    document.addEventListener('visibilitychange', scheduleRotation);
+    motion.addEventListener('change', event => {
+      if (event.matches) setRotation(false);
+    });
+
+    controls.hidden = false;
+    showSlide(0);
+    setRotation(rotating);
   </script>
 </body>
 </html>
